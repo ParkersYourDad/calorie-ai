@@ -54,7 +54,7 @@ class CalorieAiApp extends StatelessWidget {
         bodyMedium: TextStyle(fontSize: 14, height: 1.45),
         titleMedium: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
         titleLarge: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
-        headlineSmall: TextStyle(fontSize: 24, fontWeight: FontWeight.w650),
+        headlineSmall: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
       ),
     );
   }
@@ -85,7 +85,7 @@ class CalorieHomePage extends StatefulWidget {
 
 class _CalorieHomePageState extends State<CalorieHomePage> {
   final List<LoggedMeal> _meals = [];
-  int? _dailyGoal = 2000;
+  int? _dailyGoal;
   int _nextId = 0;
 
   int get _totalCalories =>
@@ -177,7 +177,7 @@ class _CalorieHomePageState extends State<CalorieHomePage> {
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
     final goal = _dailyGoal;
-    final progress = goal == null ? 0.0 : (_totalCalories / goal).clamp(0.0, 1.0);
+    final progress = goal == null ? 0.0 : (_totalCalories / goal).clamp(0.0, 1.0).toDouble();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Today'),
@@ -469,7 +469,7 @@ class _MealRow extends StatelessWidget {
         MealType.breakfast => Icons.wb_sunny_outlined,
         MealType.lunch => Icons.lunch_dining_outlined,
         MealType.dinner => Icons.dinner_dining_outlined,
-        MealType.snack => Icons.cookie_outlined,
+        MealType.snack => Icons.local_cafe_outlined,
       };
 }
 
