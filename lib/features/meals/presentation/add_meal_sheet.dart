@@ -9,11 +9,23 @@ class MealDraft {
     required this.name,
     required this.calories,
     required this.type,
+    this.proteinGrams,
+    this.carbohydratesGrams,
+    this.fatGrams,
+    this.sugarGrams,
+    this.fiberGrams,
+    this.sodiumMilligrams,
   });
 
   final String name;
   final int calories;
   final MealType type;
+  final double? proteinGrams;
+  final double? carbohydratesGrams;
+  final double? fatGrams;
+  final double? sugarGrams;
+  final double? fiberGrams;
+  final double? sodiumMilligrams;
 }
 
 class AddMealSheet extends StatefulWidget {
@@ -41,23 +53,74 @@ class _AddMealSheetState extends State<AddMealSheet> {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   final _caloriesController = TextEditingController();
+  final _proteinController = TextEditingController();
+  final _carbohydratesController = TextEditingController();
+  final _fatController = TextEditingController();
+  final _sugarController = TextEditingController();
+  final _fiberController = TextEditingController();
+  final _sodiumController = TextEditingController();
+
   MealType _type = MealType.breakfast;
 
   @override
   void dispose() {
     _nameController.dispose();
     _caloriesController.dispose();
+    _proteinController.dispose();
+    _carbohydratesController.dispose();
+    _fatController.dispose();
+    _sugarController.dispose();
+    _fiberController.dispose();
+    _sodiumController.dispose();
     super.dispose();
+  }
+
+  double? _optionalValue(TextEditingController controller, AppStrings strings) {
+    if (controller.text.trim().isEmpty) return null;
+    return strings.parseDecimal(controller.text);
   }
 
   void _save(AppStrings strings) {
     if (!_formKey.currentState!.validate()) return;
+
     Navigator.of(context).pop(
       MealDraft(
         name: _nameController.text.trim(),
         calories: strings.parseInteger(_caloriesController.text)!,
         type: _type,
+        proteinGrams: _optionalValue(_proteinController, strings),
+        carbohydratesGrams: _optionalValue(_carbohydratesController, strings),
+        fatGrams: _optionalValue(_fatController, strings),
+        sugarGrams: _optionalValue(_sugarController, strings),
+        fiberGrams: _optionalValue(_fiberController, strings),
+        sodiumMilligrams: _optionalValue(_sodiumController, strings),
       ),
+    );
+  }
+
+  Widget _nutritionField({
+    required TextEditingController controller,
+    required String label,
+    required String unit,
+    required AppStrings strings,
+  }) {
+    final maximum = unit == strings.milligrams ? 10000000.0 : 100000.0;
+    return TextFormField(
+      controller: controller,
+      keyboardType: const TextInputType.numberWithOptions(decimal: true),
+      textInputAction: TextInputAction.next,
+      decoration: InputDecoration(
+        labelText: label,
+        suffixText: unit,
+      ),
+      validator: (value) {
+        if (value == null || value.trim().isEmpty) return null;
+        final amount = strings.parseDecimal(value);
+        if (amount == null || amount < 0 || amount > maximum) {
+          return strings.enterValidNutrition;
+        }
+        return null;
+      },
     );
   }
 
@@ -99,8 +162,7 @@ class _AddMealSheetState extends State<AddMealSheet> {
               keyboardType: const TextInputType.numberWithOptions(
                 decimal: false,
               ),
-              textInputAction: TextInputAction.done,
-              onFieldSubmitted: (_) => _save(strings),
+              textInputAction: TextInputAction.next,
               decoration: InputDecoration(
                 labelText: strings.calories,
                 hintText: strings.caloriesHint,
@@ -129,6 +191,92 @@ class _AddMealSheetState extends State<AddMealSheet> {
               onChanged: (value) {
                 if (value != null) setState(() => _type = value);
               },
+            ),
+            const SizedBox(height: AppSpacing.xs),
+            ExpansionTile(
+              key: const PageStorageKey<String>('optional-nutrition-fields'),
+              maintainState: true,
+              tilePadding: EdgeInsets.zero,
+              childrenPadding: const EdgeInsets.only(
+                bottom: AppSpacing.sm,
+              ),
+              title: Text(
+                '${strings.nutritionDetails} · ${strings.optional}',
+                style: textTheme.titleMedium,
+              ),
+              subtitle: Text(
+                strings.nutritionHint,
+                style: textTheme.bodySmall,
+              ),
+              children: [
+                const SizedBox(height: AppSpacing.sm),
+                LayoutBuilder(
+                  builder: (context, constraints) {
+                    final fieldWidth =
+                        (constraints.maxWidth - AppSpacing.sm) / 2;
+                    return Wrap(
+                      spacing: AppSpacing.sm,
+                      runSpacing: AppSpacing.md,
+                      children: [
+                        SizedBox(
+                          width: fieldWidth,
+                          child: _nutritionField(
+                            controller: _proteinController,
+                            label: strings.protein,
+                            unit: strings.grams,
+                            strings: strings,
+                          ),
+                        ),
+                        SizedBox(
+                          width: fieldWidth,
+                          child: _nutritionField(
+                            controller: _carbohydratesController,
+                            label: strings.carbohydrates,
+                            unit: strings.grams,
+                            strings: strings,
+                          ),
+                        ),
+                        SizedBox(
+                          width: fieldWidth,
+                          child: _nutritionField(
+                            controller: _fatController,
+                            label: strings.fat,
+                            unit: strings.grams,
+                            strings: strings,
+                          ),
+                        ),
+                        SizedBox(
+                          width: fieldWidth,
+                          child: _nutritionField(
+                            controller: _sugarController,
+                            label: strings.sugar,
+                            unit: strings.grams,
+                            strings: strings,
+                          ),
+                        ),
+                        SizedBox(
+                          width: fieldWidth,
+                          child: _nutritionField(
+                            controller: _fiberController,
+                            label: strings.fiber,
+                            unit: strings.grams,
+                            strings: strings,
+                          ),
+                        ),
+                        SizedBox(
+                          width: fieldWidth,
+                          child: _nutritionField(
+                            controller: _sodiumController,
+                            label: strings.sodium,
+                            unit: strings.milligrams,
+                            strings: strings,
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              ],
             ),
             const SizedBox(height: AppSpacing.lg),
             Row(
