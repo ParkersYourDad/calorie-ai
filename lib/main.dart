@@ -22,7 +22,7 @@ Future<void> main() async {
 
     final savedLocale = await preferences.getString(AppPreferenceKeys.locale);
     if (savedLocale == 'en' || savedLocale == 'ar') {
-      locale = Locale(savedLocale!);
+      locale = Locale(savedLocale);
     }
   } catch (_) {
     // Defaults are safe when preferences are unavailable.
