@@ -87,11 +87,11 @@ class AppStrings {
   String get retry => isArabic ? 'إعادة المحاولة' : 'Try again';
 
   String mealTypeLabel(String type) => switch (type) {
-        'breakfast' => breakfast,
-        'lunch' => lunch,
-        'dinner' => dinner,
-        _ => snack,
-      };
+    'breakfast' => breakfast,
+    'lunch' => lunch,
+    'dinner' => dinner,
+    _ => snack,
+  };
 
   String dateLabel(DateTime date, DateTime todayDate) {
     final day = DateTime(date.year, date.month, date.day);
