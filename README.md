@@ -1,9 +1,17 @@
 # Calorie AI
 
-Flutter mobile app for calorie tracking and AI-assisted food analysis.
+A Flutter mobile app for calorie tracking and planned AI-assisted food analysis.
 
-## Status
-Early foundation. The current screen is a UI prototype; meal logging, storage, and AI analysis are not implemented yet.
+## Current status
+
+The starter app currently supports:
+- Manual meal logging with calorie amounts and meal categories.
+- A daily calorie total and configurable daily goal.
+- Removing logged meals.
+- Local persistence of meals and the daily goal on the device.
+- System-aware light and dark themes.
+
+AI photo analysis is **not connected yet**. The app does not upload photos or invent AI estimates. A secure backend and a real model integration are required before this feature can be enabled.
 
 ## Run locally
 
@@ -14,9 +22,11 @@ flutter test
 flutter run
 ```
 
-## Principles
-- Android and iOS first
-- English and Arabic with correct RTL support
-- Light, dark, and system themes
-- AI food results must be editable and presented as estimates
-- AI provider credentials must stay on a secure backend, never in the app
+## Product principles
+
+- Android and iOS first.
+- English and Arabic locale foundations with correct directional layout as localization is implemented.
+- Light, dark, and system themes.
+- Food estimates must be clearly labeled as estimates and remain editable.
+- Provider credentials must stay on a secure backend, never in the mobile app.
+- Health-related estimates should not be presented as medical advice.
