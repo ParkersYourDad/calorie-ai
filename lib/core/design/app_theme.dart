@@ -8,55 +8,61 @@ abstract final class AppTheme {
 
   static ThemeData _build(Brightness brightness) {
     final isDark = brightness == Brightness.dark;
-    final background =
-        isDark ? AppColors.darkBackground : AppColors.lightBackground;
+    final background = isDark
+        ? AppColors.darkBackground
+        : AppColors.lightBackground;
     final surface = isDark ? AppColors.darkSurface : AppColors.lightSurface;
-    final surfaceSubtle =
-        isDark ? AppColors.darkSurfaceSubtle : AppColors.lightSurfaceSubtle;
+    final surfaceSubtle = isDark
+        ? AppColors.darkSurfaceSubtle
+        : AppColors.lightSurfaceSubtle;
     final primaryText = isDark ? AppColors.darkText : AppColors.lightText;
-    final secondaryText =
-        isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary;
+    final secondaryText = isDark
+        ? AppColors.darkTextSecondary
+        : AppColors.lightTextSecondary;
     final outline = isDark ? AppColors.darkOutline : AppColors.lightOutline;
     final error = isDark ? AppColors.darkError : AppColors.lightError;
 
-    final scheme = ColorScheme.fromSeed(
-      seedColor: const Color(0xFF55584F),
-      brightness: brightness,
-      surface: surface,
-      primary: primaryText,
-      onPrimary: isDark ? AppColors.darkBackground : Colors.white,
-      secondary: secondaryText,
-      onSecondary: isDark ? AppColors.darkBackground : Colors.white,
-      error: error,
-      onError: isDark ? AppColors.darkBackground : Colors.white,
-      outline: outline,
-      outlineVariant: outline,
-    ).copyWith(
-      primaryContainer: surfaceSubtle,
-      onPrimaryContainer: primaryText,
-      secondaryContainer: surfaceSubtle,
-      onSecondaryContainer: primaryText,
-      tertiary: secondaryText,
-      onTertiary: isDark ? AppColors.darkBackground : Colors.white,
-      tertiaryContainer: surfaceSubtle,
-      onTertiaryContainer: primaryText,
-      onSurface: primaryText,
-      onSurfaceVariant: secondaryText,
-      errorContainer: surfaceSubtle,
-      onErrorContainer: error,
-      inverseSurface: isDark ? AppColors.lightSurface : AppColors.darkSurface,
-      onInverseSurface: isDark ? AppColors.lightText : AppColors.darkText,
-      inversePrimary: isDark ? AppColors.lightText : AppColors.darkText,
-      surfaceDim: background,
-      surfaceBright: surface,
-      shadow: Colors.transparent,
-      surfaceTint: Colors.transparent,
-      surfaceContainerLowest: surface,
-      surfaceContainerLow: surfaceSubtle,
-      surfaceContainer: surfaceSubtle,
-      surfaceContainerHigh: surfaceSubtle,
-      surfaceContainerHighest: surfaceSubtle,
-    );
+    final scheme =
+        ColorScheme.fromSeed(
+          seedColor: const Color(0xFF55584F),
+          brightness: brightness,
+          surface: surface,
+          primary: primaryText,
+          onPrimary: isDark ? AppColors.darkBackground : Colors.white,
+          secondary: secondaryText,
+          onSecondary: isDark ? AppColors.darkBackground : Colors.white,
+          error: error,
+          onError: isDark ? AppColors.darkBackground : Colors.white,
+          outline: outline,
+          outlineVariant: outline,
+        ).copyWith(
+          primaryContainer: surfaceSubtle,
+          onPrimaryContainer: primaryText,
+          secondaryContainer: surfaceSubtle,
+          onSecondaryContainer: primaryText,
+          tertiary: secondaryText,
+          onTertiary: isDark ? AppColors.darkBackground : Colors.white,
+          tertiaryContainer: surfaceSubtle,
+          onTertiaryContainer: primaryText,
+          onSurface: primaryText,
+          onSurfaceVariant: secondaryText,
+          errorContainer: surfaceSubtle,
+          onErrorContainer: error,
+          inverseSurface: isDark
+              ? AppColors.lightSurface
+              : AppColors.darkSurface,
+          onInverseSurface: isDark ? AppColors.lightText : AppColors.darkText,
+          inversePrimary: isDark ? AppColors.lightText : AppColors.darkText,
+          surfaceDim: background,
+          surfaceBright: surface,
+          shadow: Colors.transparent,
+          surfaceTint: Colors.transparent,
+          surfaceContainerLowest: surface,
+          surfaceContainerLow: surfaceSubtle,
+          surfaceContainer: surfaceSubtle,
+          surfaceContainerHigh: surfaceSubtle,
+          surfaceContainerHighest: surfaceSubtle,
+        );
 
     final textTheme = const TextTheme(
       bodySmall: TextStyle(
@@ -88,10 +94,7 @@ abstract final class AppTheme {
         height: AppTypography.pageLineHeight,
         fontWeight: AppTypography.semibold,
       ),
-    ).apply(
-      bodyColor: primaryText,
-      displayColor: primaryText,
-    );
+    ).apply(bodyColor: primaryText, displayColor: primaryText);
 
     return ThemeData(
       useMaterial3: true,
@@ -172,10 +175,7 @@ abstract final class AppTheme {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppRadius.md),
           ),
-          textStyle: const TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w600,
-          ),
+          textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
         ),
       ),
       textButtonTheme: TextButtonThemeData(
@@ -185,10 +185,7 @@ abstract final class AppTheme {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppRadius.md),
           ),
-          textStyle: const TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w600,
-          ),
+          textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
         ),
       ),
       iconButtonTheme: IconButtonThemeData(
