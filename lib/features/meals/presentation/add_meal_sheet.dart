@@ -109,10 +109,7 @@ class _AddMealSheetState extends State<AddMealSheet> {
       controller: controller,
       keyboardType: const TextInputType.numberWithOptions(decimal: true),
       textInputAction: TextInputAction.next,
-      decoration: InputDecoration(
-        labelText: label,
-        suffixText: unit,
-      ),
+      decoration: InputDecoration(labelText: label, suffixText: unit),
       validator: (value) {
         if (value == null || value.trim().isEmpty) return null;
         final amount = strings.parseDecimal(value);
@@ -197,17 +194,12 @@ class _AddMealSheetState extends State<AddMealSheet> {
               key: const PageStorageKey<String>('optional-nutrition-fields'),
               maintainState: true,
               tilePadding: EdgeInsets.zero,
-              childrenPadding: const EdgeInsets.only(
-                bottom: AppSpacing.sm,
-              ),
+              childrenPadding: const EdgeInsets.only(bottom: AppSpacing.sm),
               title: Text(
                 '${strings.nutritionDetails} · ${strings.optional}',
                 style: textTheme.titleMedium,
               ),
-              subtitle: Text(
-                strings.nutritionHint,
-                style: textTheme.bodySmall,
-              ),
+              subtitle: Text(strings.nutritionHint, style: textTheme.bodySmall),
               children: [
                 const SizedBox(height: AppSpacing.sm),
                 LayoutBuilder(
