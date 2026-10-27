@@ -46,9 +46,8 @@ class NutritionSummarySheet extends StatelessWidget {
           const SizedBox(height: AppSpacing.xs),
           Text(
             strings.recordedOnlyNote,
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-              color: colors.onSurfaceVariant,
-            ),
+            style: Theme.of(context).textTheme.bodySmall
+                ?.copyWith(color: colors.onSurfaceVariant),
           ),
           const SizedBox(height: AppSpacing.md),
           _NutrientRow(
