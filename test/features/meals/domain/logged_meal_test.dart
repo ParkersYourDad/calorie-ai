@@ -62,10 +62,7 @@ void main() {
 
   test('calendar day comparison ignores time of day', () {
     expect(
-      isSameCalendarDay(
-        DateTime(2026, 10, 27, 8),
-        DateTime(2026, 10, 27, 22),
-      ),
+      isSameCalendarDay(DateTime(2026, 10, 27, 8), DateTime(2026, 10, 27, 22)),
       isTrue,
     );
     expect(
