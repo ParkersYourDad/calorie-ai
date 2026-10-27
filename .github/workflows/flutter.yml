@@ -29,18 +29,6 @@ jobs:
       - name: Resolve dependencies
         run: flutter pub get
 
-      - name: Format Dart source for repair artifact
-        run: dart format lib test
-
-      - name: Upload formatted Dart source
-        uses: actions/upload-artifact@v4
-        with:
-          name: formatted-nutrition-source
-          path: |
-            lib/
-            test/
-          retention-days: 1
-
       - name: Verify formatting
         run: dart format --output=none --set-exit-if-changed lib test
 
