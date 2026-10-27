@@ -41,14 +41,14 @@ class AppStrings {
   String get save => isArabic ? 'حفظ' : 'Save';
   String get caloriesPerDay =>
       isArabic ? 'السعرات في اليوم' : 'Calories per day';
-  String get goalHint => isArabic ? 'مثال: 2000' : 'e.g. 2000';
+  String get goalHint => isArabic ? 'مثال: ٢٠٠٠' : 'e.g. 2000';
   String get enterValidGoal => isArabic
       ? 'أدخل رقمًا بين 1 و100000'
       : 'Enter a number between 1 and 100,000';
   String get foodName => isArabic ? 'اسم الطعام' : 'Food name';
   String get foodNameHint => isArabic ? 'مثال: شوفان بالحليب' : 'e.g. Oatmeal';
   String get calories => isArabic ? 'السعرات (kcal)' : 'Calories (kcal)';
-  String get caloriesHint => isArabic ? 'مثال: 320' : 'e.g. 320';
+  String get caloriesHint => isArabic ? 'مثال: ٣٢٠' : 'e.g. 320';
   String get mealType => isArabic ? 'نوع الوجبة' : 'Meal type';
   String get enterFoodName =>
       isArabic ? 'اكتب اسم الطعام' : 'Enter a food name';
@@ -111,6 +111,17 @@ class AppStrings {
   }
 
   String number(int value) => _digits(value);
+
+  int? parseInteger(String? value) {
+    if (value == null) return null;
+    const western = '0123456789';
+    const arabic = '٠١٢٣٤٥٦٧٨٩';
+    final normalized = value.trim().split('').map((character) {
+      final index = arabic.indexOf(character);
+      return index < 0 ? character : western[index];
+    }).join();
+    return int.tryParse(normalized);
+  }
 
   String caloriesValue(int value) => '${_digits(value)} $kcal';
 
