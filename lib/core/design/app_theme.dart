@@ -31,6 +31,21 @@ abstract final class AppTheme {
       onError: isDark ? AppColors.darkBackground : Colors.white,
       outline: outline,
       outlineVariant: outline,
+    ).copyWith(
+      primaryContainer: surfaceSubtle,
+      onPrimaryContainer: primaryText,
+      secondaryContainer: surfaceSubtle,
+      onSecondaryContainer: primaryText,
+      tertiary: secondaryText,
+      onTertiary: isDark ? AppColors.darkBackground : Colors.white,
+      tertiaryContainer: surfaceSubtle,
+      onTertiaryContainer: primaryText,
+      surfaceTint: Colors.transparent,
+      surfaceContainerLowest: surface,
+      surfaceContainerLow: surfaceSubtle,
+      surfaceContainer: surfaceSubtle,
+      surfaceContainerHigh: surfaceSubtle,
+      surfaceContainerHighest: surfaceSubtle,
     );
 
     final textTheme = const TextTheme(
