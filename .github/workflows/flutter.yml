@@ -39,6 +39,7 @@ jobs:
           path: |
             lib/
             test/
+            pubspec.lock
           retention-days: 1
 
       - name: Verify formatting
