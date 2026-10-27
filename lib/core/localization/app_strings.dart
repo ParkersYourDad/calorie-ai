@@ -99,8 +99,9 @@ class AppStrings {
   String get sodium => isArabic ? 'الصوديوم' : 'Sodium';
   String get grams => isArabic ? 'جم' : 'g';
   String get milligrams => isArabic ? 'ملجم' : 'mg';
-  String get enterValidNutrition =>
-      isArabic ? 'أدخل رقمًا صحيحًا غير سالب.' : 'Enter a valid non-negative number.';
+  String get enterValidNutrition => isArabic
+      ? 'أدخل رقمًا صحيحًا غير سالب.'
+      : 'Enter a valid non-negative number.';
   String get recordedOnlyNote => isArabic
       ? 'الإجماليات تشمل القيم التي أدخلتها فقط؛ القيم الناقصة مستبعدة.'
       : 'Totals include only values you entered; missing values are excluded.';
