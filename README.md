@@ -5,6 +5,8 @@ A Flutter mobile app focused on calm, clear daily food logging. The app is inten
 ## Current capabilities
 
 - Add meals manually with a name, calorie amount, and meal category.
+- Optionally record protein, carbohydrates, fat, sugar, fiber, and sodium per meal; incomplete values remain explicitly unknown.
+- Open an on-demand daily nutrient summary when nutrient values have been entered.
 - Track daily calories and set an optional calorie goal.
 - Move between dates to view logged meals for a day.
 - Remove a meal and undo the removal.
