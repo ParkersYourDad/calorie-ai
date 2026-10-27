@@ -47,8 +47,18 @@ abstract final class AppColors {
   static const Color darkError = Color(0xFFFFB4AB);
 }
 
-abstract final class AppMotion {
-  static const Duration quick = Duration(milliseconds: 140);
-  static const Duration standard = Duration(milliseconds: 220);
-  static const Curve standardCurve = Curves.easeOutCubic;
+abstract final class AppTypography {
+  static const double caption = 12;
+  static const double body = 14;
+  static const double title = 16;
+  static const double sectionHeading = 20;
+  static const double pageHeading = 24;
+  static const double metricValue = 42;
+
+  static const double bodyLineHeight = 1.5;
+  static const double titleLineHeight = 1.45;
+  static const double pageLineHeight = 1.2;
+  static const double metricLetterSpacing = -0.5;
+
+  static const FontWeight semibold = FontWeight.w600;
 }
