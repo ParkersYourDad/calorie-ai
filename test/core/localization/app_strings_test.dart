@@ -21,6 +21,7 @@ void main() {
       const strings = AppStrings(Locale('ar'));
 
       expect(strings.number(1200), '١٢٠٠');
+      expect(strings.parseInteger('١٢٠٠'), 1200);
       expect(strings.mealTypeLabel('breakfast'), 'الإفطار');
       expect(
         strings.dateLabel(DateTime(2026, 10, 27), DateTime(2026, 10, 27)),
