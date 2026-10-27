@@ -42,7 +42,9 @@ class LoggedMeal {
 
     final MealType? parsedType;
     if (typeValue is String) {
-      parsedType = MealType.values.where((type) => type.name == typeValue).firstOrNull;
+      parsedType = MealType.values
+          .where((type) => type.name == typeValue)
+          .firstOrNull;
     } else if (typeValue is int &&
         typeValue >= 0 &&
         typeValue < MealType.values.length) {
