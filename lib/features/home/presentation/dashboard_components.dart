@@ -10,6 +10,7 @@ class DateSelector extends StatelessWidget {
     required this.isToday,
     required this.onPrevious,
     required this.onNext,
+    super.key,
   });
 
   final DateTime date;
@@ -54,6 +55,7 @@ class DailyCaloriesSummary extends StatelessWidget {
     required this.totalCalories,
     required this.goal,
     required this.onSetGoal,
+    super.key,
   });
 
   final int totalCalories;
@@ -158,7 +160,7 @@ class DailyCaloriesSummary extends StatelessWidget {
 }
 
 class EmptyMealsState extends StatelessWidget {
-  const EmptyMealsState({required this.onAddMeal});
+  const EmptyMealsState({required this.onAddMeal, super.key});
 
   final VoidCallback onAddMeal;
 
@@ -207,6 +209,7 @@ class MealRow extends StatelessWidget {
     required this.meal,
     required this.onDelete,
     required this.showDivider,
+    super.key,
   });
 
   final LoggedMeal meal;
@@ -243,10 +246,7 @@ class MealRow extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      meal.name,
-                      style: textTheme.titleMedium,
-                    ),
+                    Text(meal.name, style: textTheme.titleMedium),
                     const SizedBox(height: AppSpacing.xxs),
                     Text(
                       strings.caloriesValue(meal.calories),
@@ -277,15 +277,15 @@ class MealRow extends StatelessWidget {
   }
 
   IconData _mealIcon(MealType type) => switch (type) {
-        MealType.breakfast => Icons.wb_sunny_outlined,
-        MealType.lunch => Icons.lunch_dining_outlined,
-        MealType.dinner => Icons.dinner_dining_outlined,
-        MealType.snack => Icons.local_cafe_outlined,
-      };
+    MealType.breakfast => Icons.wb_sunny_outlined,
+    MealType.lunch => Icons.lunch_dining_outlined,
+    MealType.dinner => Icons.dinner_dining_outlined,
+    MealType.snack => Icons.local_cafe_outlined,
+  };
 }
 
 class DataWarning extends StatelessWidget {
-  const DataWarning({required this.message});
+  const DataWarning({required this.message, super.key});
 
   final String message;
 
@@ -304,9 +304,8 @@ class DataWarning extends StatelessWidget {
         Expanded(
           child: Text(
             message,
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: colors.error,
-                ),
+            style: Theme.of(context).textTheme.bodySmall
+                ?.copyWith(color: colors.error),
           ),
         ),
       ],
@@ -315,7 +314,7 @@ class DataWarning extends StatelessWidget {
 }
 
 class LoadFailure extends StatelessWidget {
-  const LoadFailure({required this.onRetry});
+  const LoadFailure({required this.onRetry, super.key});
 
   final VoidCallback onRetry;
 
@@ -341,10 +340,7 @@ class LoadFailure extends StatelessWidget {
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: AppSpacing.md),
-            FilledButton(
-              onPressed: onRetry,
-              child: Text(strings.retry),
-            ),
+            FilledButton(onPressed: onRetry, child: Text(strings.retry)),
           ],
         ),
       ),
