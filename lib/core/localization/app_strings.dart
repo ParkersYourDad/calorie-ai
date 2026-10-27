@@ -28,7 +28,8 @@ class AppStrings {
   String get caloriesConsumed =>
       isArabic ? 'السعرات المستهلكة' : 'Calories consumed';
   String get kcal => 'kcal';
-  String get dailyGoal => isArabic ? 'هدف السعرات اليومي' : 'Daily calorie goal';
+  String get dailyGoal =>
+      isArabic ? 'هدف السعرات اليومي' : 'Daily calorie goal';
   String get setGoal => isArabic ? 'تحديد الهدف' : 'Set goal';
   String get editGoal => isArabic ? 'تعديل الهدف' : 'Edit goal';
   String get goalNotSet => isArabic
@@ -49,7 +50,8 @@ class AppStrings {
   String get calories => isArabic ? 'السعرات (kcal)' : 'Calories (kcal)';
   String get caloriesHint => isArabic ? 'مثال: 320' : 'e.g. 320';
   String get mealType => isArabic ? 'نوع الوجبة' : 'Meal type';
-  String get enterFoodName => isArabic ? 'اكتب اسم الطعام' : 'Enter a food name';
+  String get enterFoodName =>
+      isArabic ? 'اكتب اسم الطعام' : 'Enter a food name';
   String get enterValidCalories => isArabic
       ? 'أدخل سعرات صحيحة من 0 إلى 100000'
       : 'Enter a valid amount from 0 to 100,000';
@@ -98,7 +100,10 @@ class AppStrings {
     if (day == today.subtract(const Duration(days: 1))) return yesterday;
 
     if (isArabic) {
-      return '${_arabicWeekdays[date.weekday - 1]}، ${_arabicDigits(date.day)} ${_arabicMonths[date.month - 1]}';
+      final weekday = _arabicWeekdays[date.weekday - 1];
+      final dayNumber = _arabicDigits(date.day);
+      final month = _arabicMonths[date.month - 1];
+      return '$weekday، $dayNumber $month';
     }
     final weekday = _weekdays[date.weekday - 1];
     final month = _months[date.month - 1];
