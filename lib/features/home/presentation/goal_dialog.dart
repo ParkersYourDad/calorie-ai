@@ -46,7 +46,7 @@ class GoalDialogState extends State<GoalDialog> {
             hintText: strings.goalHint,
           ),
           validator: (value) {
-            final goal = int.tryParse(value?.trim() ?? '');
+            final goal = strings.parseInteger(value);
             if (goal == null || goal < 1 || goal > 100000) {
               return strings.enterValidGoal;
             }
@@ -70,6 +70,6 @@ class GoalDialogState extends State<GoalDialog> {
 
   void _save(AppStrings strings) {
     if (!_formKey.currentState!.validate()) return;
-    Navigator.of(context).pop(int.parse(_controller.text.trim()));
+    Navigator.of(context).pop(strings.parseInteger(_controller.text)!);
   }
 }
