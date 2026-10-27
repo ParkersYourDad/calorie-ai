@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../core/design/app_tokens.dart';
 import '../../../core/localization/app_strings.dart';
 
-class AppSettingsSheet extends StatelessWidget {
+class AppSettingsSheet extends StatefulWidget {
   const AppSettingsSheet({
     required this.themeMode,
     required this.locale,
@@ -38,12 +38,37 @@ class AppSettingsSheet extends StatelessWidget {
   }
 
   @override
+  State<AppSettingsSheet> createState() => _AppSettingsSheetState();
+}
+
+class _AppSettingsSheetState extends State<AppSettingsSheet> {
+  late ThemeMode _themeMode;
+  Locale? _locale;
+
+  @override
+  void initState() {
+    super.initState();
+    _themeMode = widget.themeMode;
+    _locale = widget.locale;
+  }
+
+  void _selectTheme(ThemeMode value) {
+    setState(() => _themeMode = value);
+    widget.onThemeModeChanged(value);
+  }
+
+  void _selectLocale(Locale? value) {
+    setState(() => _locale = value);
+    widget.onLocaleChanged(value);
+  }
+
+  @override
   Widget build(BuildContext context) {
     final strings = AppStrings.of(context);
     final colors = Theme.of(context).colorScheme;
-    final selectedLocale = locale?.languageCode ?? 'system';
+    final selectedLocale = _locale?.languageCode ?? 'system';
 
-    return Padding(
+    return SingleChildScrollView(
       padding: const EdgeInsets.fromLTRB(
         AppSpacing.lg,
         AppSpacing.sm,
@@ -77,10 +102,13 @@ class AppSettingsSheet extends StatelessWidget {
                   value: ThemeMode.light,
                   label: Text(strings.light),
                 ),
-                ButtonSegment(value: ThemeMode.dark, label: Text(strings.dark)),
+                ButtonSegment(
+                  value: ThemeMode.dark,
+                  label: Text(strings.dark),
+                ),
               ],
-              selected: {themeMode},
-              onSelectionChanged: (value) => onThemeModeChanged(value.first),
+              selected: {_themeMode},
+              onSelectionChanged: (value) => _selectTheme(value.first),
             ),
           ),
           const SizedBox(height: AppSpacing.lg),
@@ -104,7 +132,7 @@ class AppSettingsSheet extends StatelessWidget {
               selected: {selectedLocale},
               onSelectionChanged: (value) {
                 final selected = value.first;
-                onLocaleChanged(
+                _selectLocale(
                   selected == 'system' ? null : Locale(selected),
                 );
               },
