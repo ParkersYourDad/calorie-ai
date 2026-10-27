@@ -204,7 +204,6 @@ class _CalorieHomePageState extends State<CalorieHomePage> {
   @override
   Widget build(BuildContext context) {
     final strings = AppStrings.of(context);
-    final colors = Theme.of(context).colorScheme;
 
     return Scaffold(
       appBar: AppBar(
