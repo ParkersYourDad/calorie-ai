@@ -571,8 +571,6 @@ class _MealRow extends StatelessWidget {
                     Text(
                       meal.name,
                       style: textTheme.titleMedium,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
                     ),
                     const SizedBox(height: AppSpacing.xxs),
                     Text(
