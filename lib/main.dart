@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -87,6 +90,58 @@ class _CalorieHomePageState extends State<CalorieHomePage> {
   final List<LoggedMeal> _meals = [];
   int? _dailyGoal;
   int _nextId = 0;
+  final SharedPreferencesAsync _preferences = SharedPreferencesAsync();
+
+  static const _mealsKey = 'calorie_ai.meals';
+  static const _goalKey = 'calorie_ai.daily_goal';
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSavedData();
+  }
+
+  Future<void> _loadSavedData() async {
+    try {
+      final rawMeals = await _preferences.getString(_mealsKey);
+      final savedGoal = await _preferences.getInt(_goalKey);
+      final restoredMeals = rawMeals == null
+          ? <LoggedMeal>[]
+          : (jsonDecode(rawMeals) as List<dynamic>).map((item) {
+              final map = item as Map<String, dynamic>;
+              final typeIndex = map['type'] as int;
+              return LoggedMeal(
+                id: map['id'] as int,
+                name: map['name'] as String,
+                calories: map['calories'] as int,
+                type: MealType.values[typeIndex.clamp(0, MealType.values.length - 1)],
+              );
+            }).toList();
+      if (!mounted) return;
+      setState(() {
+        _meals
+          ..clear()
+          ..addAll(restoredMeals);
+        _dailyGoal = savedGoal;
+        _nextId = restoredMeals.fold<int>(
+              0,
+              (highest, meal) => meal.id >= highest ? meal.id + 1 : highest,
+            );
+      });
+    } catch (_) {
+      // Keep the app usable if stored data is missing or malformed.
+    }
+  }
+
+  Future<void> _saveMeals() async {
+    final payload = jsonEncode(_meals.map((meal) => {
+          'id': meal.id,
+          'name': meal.name,
+          'calories': meal.calories,
+          'type': meal.type.index,
+        }).toList());
+    await _preferences.setString(_mealsKey, payload);
+  }
 
   int get _totalCalories =>
       _meals.fold(0, (total, meal) => total + meal.calories);
@@ -103,6 +158,7 @@ class _CalorieHomePageState extends State<CalorieHomePage> {
           calories: meal.calories,
           type: meal.type,
         )));
+    await _saveMeals();
   }
 
   Future<void> _setGoal() async {
@@ -141,6 +197,7 @@ class _CalorieHomePageState extends State<CalorieHomePage> {
     controller.dispose();
     if (!mounted || goal == null) return;
     setState(() => _dailyGoal = goal);
+    await _preferences.setInt(_goalKey, goal);
   }
 
   Future<void> _showAiStatus() async {
@@ -163,8 +220,9 @@ class _CalorieHomePageState extends State<CalorieHomePage> {
     );
   }
 
-  void _removeMeal(LoggedMeal meal) {
+  Future<void> _removeMeal(LoggedMeal meal) async {
     setState(() => _meals.removeWhere((item) => item.id == meal.id));
+    await _saveMeals();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('${meal.name} removed'),
