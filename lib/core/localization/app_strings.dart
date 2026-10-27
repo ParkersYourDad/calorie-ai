@@ -78,6 +78,11 @@ class AppStrings {
   String get settingsHint => isArabic
       ? 'يُحفظ اختيارك على هذا الجهاز.'
       : 'Your choices are saved on this device.';
+  String get loading => isArabic ? 'جارٍ تحميل البيانات' : 'Loading your data';
+  String get loadFailed => isArabic
+      ? 'تعذّر تحميل البيانات المحفوظة.'
+      : 'Could not load your saved data.';
+  String get retry => isArabic ? 'إعادة المحاولة' : 'Try again';
 
   String mealTypeLabel(String type) => switch (type) {
         'breakfast' => breakfast,
@@ -99,6 +104,8 @@ class AppStrings {
     final month = _months[date.month - 1];
     return '$weekday, $month ${date.day}';
   }
+
+  String number(int value) => _digits(value);
 
   String caloriesValue(int value) => '${_digits(value)} $kcal';
 
