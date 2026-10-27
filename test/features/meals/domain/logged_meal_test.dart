@@ -1,5 +1,5 @@
-import 'package:flutter_test/flutter_test.dart';
 import 'package:calorie_ai/features/meals/domain/logged_meal.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('LoggedMeal', () {
