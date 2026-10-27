@@ -16,12 +16,12 @@ class LoggedMeal {
   final DateTime loggedAt;
 
   Map<String, Object> toJson() => {
-        'id': id,
-        'name': name,
-        'calories': calories,
-        'type': type.name,
-        'loggedAt': loggedAt.toIso8601String(),
-      };
+    'id': id,
+    'name': name,
+    'calories': calories,
+    'type': type.name,
+    'loggedAt': loggedAt.toIso8601String(),
+  };
 
   static LoggedMeal? tryParse(Object? value) {
     if (value is! Map) return null;
@@ -55,8 +55,7 @@ class LoggedMeal {
     if (parsedType == null) return null;
 
     final rawDate = value['loggedAt'];
-    final parsedDate =
-        rawDate is String ? DateTime.tryParse(rawDate) : null;
+    final parsedDate = rawDate is String ? DateTime.tryParse(rawDate) : null;
 
     return LoggedMeal(
       id: idValue.toInt(),
