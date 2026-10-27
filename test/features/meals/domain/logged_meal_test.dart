@@ -5,7 +5,7 @@ void main() {
   group('LoggedMeal', () {
     test('round-trips a saved meal', () {
       final loggedAt = DateTime(2026, 10, 27, 12, 30);
-      const meal = LoggedMeal(
+      final meal = LoggedMeal(
         id: 42,
         name: 'Oatmeal',
         calories: 320,
