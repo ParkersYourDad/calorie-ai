@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../core/localization/app_strings.dart';
 
 class GoalDialog extends StatefulWidget {
-  const GoalDialog({required this.initialGoal});
+  const GoalDialog({required this.initialGoal, super.key});
 
   final int? initialGoal;
 
