@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../core/design/app_tokens.dart';
-import '../../core/localization/app_strings.dart';
+import '../../../core/design/app_tokens.dart';
+import '../../../core/localization/app_strings.dart';
 
 class AppSettingsSheet extends StatelessWidget {
   const AppSettingsSheet({
