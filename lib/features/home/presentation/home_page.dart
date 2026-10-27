@@ -97,12 +97,12 @@ class _CalorieHomePageState extends State<CalorieHomePage> {
   }
 
   Future<void> _openSettings() => AppSettingsSheet.show(
-        context,
-        themeMode: widget.themeMode,
-        locale: widget.locale,
-        onThemeModeChanged: widget.onThemeModeChanged,
-        onLocaleChanged: widget.onLocaleChanged,
-      );
+    context,
+    themeMode: widget.themeMode,
+    locale: widget.locale,
+    onThemeModeChanged: widget.onThemeModeChanged,
+    onLocaleChanged: widget.onLocaleChanged,
+  );
 
   void _moveDay(int offset) {
     final candidate = _selectedDate.add(Duration(days: offset));
@@ -216,10 +216,7 @@ class _CalorieHomePageState extends State<CalorieHomePage> {
         title: Text(strings.appName),
         actions: [
           if (!_isShowingToday)
-            TextButton(
-              onPressed: _returnToToday,
-              child: Text(strings.today),
-            ),
+            TextButton(onPressed: _returnToToday, child: Text(strings.today)),
           IconButton(
             tooltip: strings.settings,
             onPressed: _openSettings,
@@ -238,69 +235,69 @@ class _CalorieHomePageState extends State<CalorieHomePage> {
                 ),
               )
             : _loadFailed
-                ? LoadFailure(onRetry: _loadSavedData)
-                : Center(
-                    child: ConstrainedBox(
-                      constraints: const BoxConstraints(
-                        maxWidth: AppSizes.contentMaxWidth,
+            ? LoadFailure(onRetry: _loadSavedData)
+            : Center(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(
+                    maxWidth: AppSizes.contentMaxWidth,
+                  ),
+                  child: ListView(
+                    padding: const EdgeInsets.fromLTRB(
+                      AppSizes.pageHorizontalPadding,
+                      AppSpacing.sm,
+                      AppSizes.pageHorizontalPadding,
+                      AppSpacing.xxl,
+                    ),
+                    children: [
+                      DateSelector(
+                        date: _selectedDate,
+                        isToday: _isShowingToday,
+                        onPrevious: () => _moveDay(-1),
+                        onNext: () => _moveDay(1),
                       ),
-                      child: ListView(
-                        padding: const EdgeInsets.fromLTRB(
-                          AppSizes.pageHorizontalPadding,
-                          AppSpacing.sm,
-                          AppSizes.pageHorizontalPadding,
-                          AppSpacing.xxl,
-                        ),
+                      const SizedBox(height: AppSpacing.md),
+                      Text(
+                        strings.dailyOverview,
+                        style: Theme.of(context).textTheme.headlineSmall,
+                      ),
+                      const SizedBox(height: AppSpacing.lg),
+                      DailyCaloriesSummary(
+                        totalCalories: _totalCalories,
+                        goal: _dailyGoal,
+                        onSetGoal: _setGoal,
+                      ),
+                      if (_hasUnreadableData) ...[
+                        const SizedBox(height: AppSpacing.md),
+                        DataWarning(message: strings.storedDataWarning),
+                      ],
+                      const SizedBox(height: AppSpacing.xl),
+                      Row(
                         children: [
-                          DateSelector(
-                            date: _selectedDate,
-                            isToday: _isShowingToday,
-                            onPrevious: () => _moveDay(-1),
-                            onNext: () => _moveDay(1),
+                          Expanded(
+                            child: Text(
+                              strings.meals,
+                              style: Theme.of(context).textTheme.titleLarge,
+                            ),
                           ),
-                          const SizedBox(height: AppSpacing.md),
-                          Text(
-                            strings.dailyOverview,
-                            style: Theme.of(context).textTheme.headlineSmall,
+                          TextButton.icon(
+                            onPressed: _addMeal,
+                            icon: const Icon(
+                              Icons.add_rounded,
+                              size: AppSizes.iconSmall,
+                            ),
+                            label: Text(strings.addMeal),
                           ),
-                          const SizedBox(height: AppSpacing.lg),
-                          DailyCaloriesSummary(
-                            totalCalories: _totalCalories,
-                            goal: _dailyGoal,
-                            onSetGoal: _setGoal,
-                          ),
-                          if (_hasUnreadableData) ...[
-                            const SizedBox(height: AppSpacing.md),
-                            DataWarning(message: strings.storedDataWarning),
-                          ],
-                          const SizedBox(height: AppSpacing.xl),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: Text(
-                                  strings.meals,
-                                  style: Theme.of(context).textTheme.titleLarge,
-                                ),
-                              ),
-                              TextButton.icon(
-                                onPressed: _addMeal,
-                                icon: const Icon(
-                                  Icons.add_rounded,
-                                  size: AppSizes.iconSmall,
-                                ),
-                                label: Text(strings.addMeal),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: AppSpacing.sm),
-                          if (_selectedDayMeals.isEmpty)
-                            EmptyMealsState(onAddMeal: _addMeal)
-                          else
-                            ..._buildMealSections(strings),
                         ],
                       ),
-                    ),
+                      const SizedBox(height: AppSpacing.sm),
+                      if (_selectedDayMeals.isEmpty)
+                        EmptyMealsState(onAddMeal: _addMeal)
+                      else
+                        ..._buildMealSections(strings),
+                    ],
                   ),
+                ),
+              ),
       ),
     );
   }
@@ -308,10 +305,9 @@ class _CalorieHomePageState extends State<CalorieHomePage> {
   List<Widget> _buildMealSections(AppStrings strings) {
     final children = <Widget>[];
     for (final type in MealType.values) {
-      final meals = _selectedDayMeals
-          .where((meal) => meal.type == type)
-          .toList()
-        ..sort((a, b) => b.loggedAt.compareTo(a.loggedAt));
+      final meals =
+          _selectedDayMeals.where((meal) => meal.type == type).toList()
+            ..sort((a, b) => b.loggedAt.compareTo(a.loggedAt));
       if (meals.isEmpty) continue;
 
       children.add(
