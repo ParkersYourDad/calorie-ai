@@ -90,6 +90,7 @@ class _CalorieHomePageState extends State<CalorieHomePage> {
   final List<LoggedMeal> _meals = [];
   int? _dailyGoal;
   int _nextId = 0;
+  bool _isLoading = true;
   final SharedPreferencesAsync _preferences = SharedPreferencesAsync();
 
   static const _mealsKey = 'calorie_ai.meals';
@@ -130,6 +131,8 @@ class _CalorieHomePageState extends State<CalorieHomePage> {
       });
     } catch (_) {
       // Keep the app usable if stored data is missing or malformed.
+    } finally {
+      if (mounted) setState(() => _isLoading = false);
     }
   }
 
@@ -249,7 +252,9 @@ class _CalorieHomePageState extends State<CalorieHomePage> {
         ],
       ),
       body: SafeArea(
-        child: ListView(
+        child: _isLoading
+            ? const Center(child: CircularProgressIndicator())
+            : ListView(
           padding: const EdgeInsets.fromLTRB(20, 12, 20, 28),
           children: [
             Text(
