@@ -11,8 +11,9 @@ Future<void> main() async {
   final preferences = SharedPreferencesAsync();
 
   try {
-    final savedThemeName =
-        await preferences.getString(AppPreferenceKeys.themeMode);
+    final savedThemeName = await preferences.getString(
+      AppPreferenceKeys.themeMode,
+    );
     for (final mode in ThemeMode.values) {
       if (mode.name == savedThemeName) {
         themeMode = mode;
@@ -22,16 +23,11 @@ Future<void> main() async {
 
     final savedLocale = await preferences.getString(AppPreferenceKeys.locale);
     if (savedLocale == 'en' || savedLocale == 'ar') {
-      locale = Locale(savedLocale);
+      locale = Locale(savedLocale!);
     }
   } catch (_) {
     // Defaults are safe when preferences are unavailable.
   }
 
-  runApp(
-    CalorieAiApp(
-      initialThemeMode: themeMode,
-      initialLocale: locale,
-    ),
-  );
+  runApp(CalorieAiApp(initialThemeMode: themeMode, initialLocale: locale));
 }
