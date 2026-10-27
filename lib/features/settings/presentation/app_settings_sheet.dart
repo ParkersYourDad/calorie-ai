@@ -102,10 +102,7 @@ class _AppSettingsSheetState extends State<AppSettingsSheet> {
                   value: ThemeMode.light,
                   label: Text(strings.light),
                 ),
-                ButtonSegment(
-                  value: ThemeMode.dark,
-                  label: Text(strings.dark),
-                ),
+                ButtonSegment(value: ThemeMode.dark, label: Text(strings.dark)),
               ],
               selected: {_themeMode},
               onSelectionChanged: (value) => _selectTheme(value.first),
@@ -132,18 +129,15 @@ class _AppSettingsSheetState extends State<AppSettingsSheet> {
               selected: {selectedLocale},
               onSelectionChanged: (value) {
                 final selected = value.first;
-                _selectLocale(
-                  selected == 'system' ? null : Locale(selected),
-                );
+                _selectLocale(selected == 'system' ? null : Locale(selected));
               },
             ),
           ),
           const SizedBox(height: AppSpacing.md),
           Text(
             strings.settingsHint,
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: colors.onSurfaceVariant,
-                ),
+            style: Theme.of(context).textTheme.bodySmall
+                ?.copyWith(color: colors.onSurfaceVariant),
           ),
         ],
       ),
