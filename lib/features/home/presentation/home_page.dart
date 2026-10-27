@@ -273,7 +273,9 @@ class _CalorieHomePageState extends State<CalorieHomePage> {
                         goal: _dailyGoal,
                         onSetGoal: _setGoal,
                       ),
-                      if (_selectedDayMeals.any((meal) => meal.hasNutritionDetails))
+                      if (_selectedDayMeals.any(
+                        (meal) => meal.hasNutritionDetails,
+                      ))
                         Align(
                           alignment: AlignmentDirectional.centerStart,
                           child: TextButton.icon(
