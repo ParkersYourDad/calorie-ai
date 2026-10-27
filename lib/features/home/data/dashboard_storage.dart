@@ -30,6 +30,7 @@ class DashboardStorage {
     final savedGoal = await _preferences.getInt(_goalKey);
     final rawMeals = await _preferences.getString(_mealsKey);
     final meals = <LoggedMeal>[];
+    var requiresMigration = false;
 
     if (rawMeals != null) {
       try {
@@ -38,6 +39,10 @@ class DashboardStorage {
           hasUnreadableData = true;
         } else {
           for (final item in decoded) {
+            if (item is Map &&
+                (item['loggedAt'] == null || item['type'] is int)) {
+              requiresMigration = true;
+            }
             final meal = LoggedMeal.tryParse(item);
             if (meal == null) {
               hasUnreadableData = true;
@@ -49,6 +54,10 @@ class DashboardStorage {
       } on FormatException {
         hasUnreadableData = true;
       }
+    }
+
+    if (requiresMigration && !hasUnreadableData) {
+      await saveMeals(meals);
     }
 
     return DashboardSnapshot(
