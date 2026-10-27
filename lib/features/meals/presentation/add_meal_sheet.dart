@@ -55,7 +55,7 @@ class _AddMealSheetState extends State<AddMealSheet> {
     Navigator.of(context).pop(
       MealDraft(
         name: _nameController.text.trim(),
-        calories: int.parse(_caloriesController.text.trim()),
+        calories: strings.parseInteger(_caloriesController.text)!,
         type: _type,
       ),
     );
@@ -106,7 +106,7 @@ class _AddMealSheetState extends State<AddMealSheet> {
                 hintText: strings.caloriesHint,
               ),
               validator: (value) {
-                final calories = int.tryParse(value?.trim() ?? '');
+                final calories = strings.parseInteger(value);
                 if (calories == null || calories < 0 || calories > 100000) {
                   return strings.enterValidCalories;
                 }
