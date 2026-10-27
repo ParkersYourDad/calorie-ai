@@ -8,7 +8,7 @@ class GoalDialog extends StatefulWidget {
   final int? initialGoal;
 
   @override
-  State<_GoalDialog> createState() => GoalDialogState();
+  State<GoalDialog> createState() => GoalDialogState();
 }
 
 class GoalDialogState extends State<_GoalDialog> {
