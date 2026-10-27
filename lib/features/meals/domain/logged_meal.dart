@@ -93,13 +93,17 @@ class LoggedMeal {
       // Older saved entries did not include a timestamp.
       loggedAt: parsedDate ?? DateTime.now(),
       proteinGrams: _optionalMeasure(value['proteinGrams'], maximum: 100000),
-      carbohydratesGrams:
-          _optionalMeasure(value['carbohydratesGrams'], maximum: 100000),
+      carbohydratesGrams: _optionalMeasure(
+        value['carbohydratesGrams'],
+        maximum: 100000,
+      ),
       fatGrams: _optionalMeasure(value['fatGrams'], maximum: 100000),
       sugarGrams: _optionalMeasure(value['sugarGrams'], maximum: 100000),
       fiberGrams: _optionalMeasure(value['fiberGrams'], maximum: 100000),
-      sodiumMilligrams:
-          _optionalMeasure(value['sodiumMilligrams'], maximum: 10000000),
+      sodiumMilligrams: _optionalMeasure(
+        value['sodiumMilligrams'],
+        maximum: 10000000,
+      ),
     );
   }
 }
