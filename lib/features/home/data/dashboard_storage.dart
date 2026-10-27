@@ -18,7 +18,7 @@ class DashboardSnapshot {
 
 class DashboardStorage {
   DashboardStorage({SharedPreferencesAsync? preferences})
-      : _preferences = preferences ?? SharedPreferencesAsync();
+    : _preferences = preferences ?? SharedPreferencesAsync();
 
   static const _mealsKey = 'calorie_ai.meals';
   static const _goalKey = 'calorie_ai.daily_goal';
@@ -72,6 +72,5 @@ class DashboardStorage {
     await _preferences.setString(_mealsKey, payload);
   }
 
-  Future<void> saveDailyGoal(int goal) =>
-      _preferences.setInt(_goalKey, goal);
+  Future<void> saveDailyGoal(int goal) => _preferences.setInt(_goalKey, goal);
 }
