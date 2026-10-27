@@ -287,13 +287,6 @@ class _CalorieHomePageState extends State<CalorieHomePage> {
                             _EmptyMealsState(onAddMeal: _addMeal)
                           else
                             ..._buildMealSections(strings),
-                          const SizedBox(height: AppSpacing.sm),
-                          Text(
-                            strings.manualEntryNote,
-                            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                  color: colors.onSurfaceVariant,
-                                ),
-                          ),
                         ],
                       ),
                     ),
