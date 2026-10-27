@@ -100,9 +100,9 @@ class DailyCaloriesSummary extends StatelessWidget {
                   child: Text(
                     strings.number(totalCalories),
                     style: textTheme.headlineSmall?.copyWith(
-                      fontSize: 42,
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: -1.1,
+                      fontSize: AppTypography.metricValue,
+                      fontWeight: AppTypography.semibold,
+                      letterSpacing: AppTypography.metricLetterSpacing,
                     ),
                   ),
                 ),
