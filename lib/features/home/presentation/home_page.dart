@@ -110,6 +110,10 @@ class _CalorieHomePageState extends State<CalorieHomePage> {
     setState(() => _selectedDate = candidate);
   }
 
+  void _returnToToday() {
+    setState(() => _selectedDate = calendarDay(DateTime.now()));
+  }
+
   Future<void> _addMeal() async {
     final draft = await AddMealSheet.show(context);
     if (!mounted || draft == null) return;
@@ -211,6 +215,11 @@ class _CalorieHomePageState extends State<CalorieHomePage> {
       appBar: AppBar(
         title: Text(strings.appName),
         actions: [
+          if (!_isShowingToday)
+            TextButton(
+              onPressed: _returnToToday,
+              child: Text(strings.today),
+            ),
           IconButton(
             tooltip: strings.settings,
             onPressed: _openSettings,
