@@ -59,7 +59,6 @@ abstract final class AppTheme {
         fontSize: 24,
         height: 1.2,
         fontWeight: FontWeight.w600,
-        letterSpacing: -0.45,
       ),
     ).apply(
       bodyColor: primaryText,
@@ -73,7 +72,7 @@ abstract final class AppTheme {
       scaffoldBackgroundColor: background,
       canvasColor: background,
       dividerColor: outline,
-      splashFactory: InkSparkle.splashFactory,
+      splashFactory: InkRipple.splashFactory,
       visualDensity: VisualDensity.standard,
       materialTapTargetSize: MaterialTapTargetSize.padded,
       textTheme: textTheme,
