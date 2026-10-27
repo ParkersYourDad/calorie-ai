@@ -8,10 +8,10 @@ class GoalDialog extends StatefulWidget {
   final int? initialGoal;
 
   @override
-  State<GoalDialog> createState() => GoalDialogState();
+  State<GoalDialog> createState() => _GoalDialogState();
 }
 
-class GoalDialogState extends State<GoalDialog> {
+class _GoalDialogState extends State<GoalDialog> {
   final _formKey = GlobalKey<FormState>();
   late final TextEditingController _controller;
 
