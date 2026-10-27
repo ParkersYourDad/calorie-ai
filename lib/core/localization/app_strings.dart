@@ -85,6 +85,28 @@ class AppStrings {
       ? 'تعذّر تحميل البيانات المحفوظة.'
       : 'Could not load your saved data.';
   String get retry => isArabic ? 'إعادة المحاولة' : 'Try again';
+  String get nutritionDetails =>
+      isArabic ? 'تفاصيل العناصر الغذائية' : 'Nutrition details';
+  String get optional => isArabic ? 'اختياري' : 'Optional';
+  String get nutritionHint => isArabic
+      ? 'أدخل القيم التي تعرفها فقط؛ واترك الباقي فارغًا.'
+      : 'Enter only the values you know; leave the rest blank.';
+  String get protein => isArabic ? 'البروتين' : 'Protein';
+  String get carbohydrates => isArabic ? 'الكربوهيدرات' : 'Carbohydrates';
+  String get fat => isArabic ? 'الدهون' : 'Fat';
+  String get sugar => isArabic ? 'السكر' : 'Sugar';
+  String get fiber => isArabic ? 'الألياف' : 'Fiber';
+  String get sodium => isArabic ? 'الصوديوم' : 'Sodium';
+  String get grams => isArabic ? 'جم' : 'g';
+  String get milligrams => isArabic ? 'ملجم' : 'mg';
+  String get enterValidNutrition =>
+      isArabic ? 'أدخل رقمًا صحيحًا غير سالب.' : 'Enter a valid non-negative number.';
+  String get recordedOnlyNote => isArabic
+      ? 'الإجماليات تشمل القيم التي أدخلتها فقط؛ القيم الناقصة مستبعدة.'
+      : 'Totals include only values you entered; missing values are excluded.';
+  String recordedInMeals(int recorded, int total) => isArabic
+      ? 'مسجل في ${number(recorded)} من ${number(total)} وجبات'
+      : 'Recorded in $recorded of $total meals';
 
   String mealTypeLabel(String type) => switch (type) {
     'breakfast' => breakfast,
@@ -113,14 +135,35 @@ class AppStrings {
   String number(int value) => _digits(value);
 
   int? parseInteger(String? value) {
+    final parsed = parseDecimal(value);
+    if (parsed == null || parsed != parsed.truncateToDouble()) return null;
+    return parsed.toInt();
+  }
+
+  double? parseDecimal(String? value) {
     if (value == null) return null;
     const western = '0123456789';
     const arabic = '٠١٢٣٤٥٦٧٨٩';
     final normalized = value.trim().split('').map((character) {
+      if (character == '٫') return '.';
       final index = arabic.indexOf(character);
       return index < 0 ? character : western[index];
     }).join();
-    return int.tryParse(normalized);
+    final parsed = double.tryParse(normalized);
+    return parsed != null && parsed.isFinite ? parsed : null;
+  }
+
+  String decimal(double value) {
+    final normalized = value == value.roundToDouble()
+        ? value.toInt().toString()
+        : value.toStringAsFixed(1);
+    if (!isArabic) return normalized;
+    return normalized.replaceAll('.', '٫').split('').map((character) {
+      const western = '0123456789';
+      const arabic = '٠١٢٣٤٥٦٧٨٩';
+      final index = western.indexOf(character);
+      return index < 0 ? character : arabic[index];
+    }).join();
   }
 
   String caloriesValue(int value) => '${_digits(value)} $kcal';
