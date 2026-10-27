@@ -59,15 +59,24 @@ class AppSettingsSheet extends StatelessWidget {
             style: Theme.of(context).textTheme.headlineSmall,
           ),
           const SizedBox(height: AppSpacing.lg),
-          Text(strings.appearance, style: Theme.of(context).textTheme.titleMedium),
+          Text(
+            strings.appearance,
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
           const SizedBox(height: AppSpacing.sm),
           SizedBox(
             width: double.infinity,
             child: SegmentedButton<ThemeMode>(
               showSelectedIcon: false,
               segments: [
-                ButtonSegment(value: ThemeMode.system, label: Text(strings.system)),
-                ButtonSegment(value: ThemeMode.light, label: Text(strings.light)),
+                ButtonSegment(
+                  value: ThemeMode.system,
+                  label: Text(strings.system),
+                ),
+                ButtonSegment(
+                  value: ThemeMode.light,
+                  label: Text(strings.light),
+                ),
                 ButtonSegment(value: ThemeMode.dark, label: Text(strings.dark)),
               ],
               selected: {themeMode},
@@ -75,14 +84,20 @@ class AppSettingsSheet extends StatelessWidget {
             ),
           ),
           const SizedBox(height: AppSpacing.lg),
-          Text(strings.language, style: Theme.of(context).textTheme.titleMedium),
+          Text(
+            strings.language,
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
           const SizedBox(height: AppSpacing.sm),
           SizedBox(
             width: double.infinity,
             child: SegmentedButton<String>(
               showSelectedIcon: false,
               segments: [
-                ButtonSegment(value: 'system', label: Text(strings.deviceLanguage)),
+                ButtonSegment(
+                  value: 'system',
+                  label: Text(strings.deviceLanguage),
+                ),
                 const ButtonSegment(value: 'en', label: Text('English')),
                 const ButtonSegment(value: 'ar', label: Text('العربية')),
               ],
