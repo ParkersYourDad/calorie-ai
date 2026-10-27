@@ -49,16 +49,34 @@ abstract final class AppTheme {
     );
 
     final textTheme = const TextTheme(
-      bodySmall: TextStyle(fontSize: 12, height: 1.45),
-      bodyMedium: TextStyle(fontSize: 14, height: 1.5),
-      bodyLarge: TextStyle(fontSize: 16, height: 1.45),
-      titleSmall: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
-      titleMedium: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-      titleLarge: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+      bodySmall: TextStyle(
+        fontSize: AppTypography.caption,
+        height: AppTypography.titleLineHeight,
+      ),
+      bodyMedium: TextStyle(
+        fontSize: AppTypography.body,
+        height: AppTypography.bodyLineHeight,
+      ),
+      bodyLarge: TextStyle(
+        fontSize: AppTypography.title,
+        height: AppTypography.titleLineHeight,
+      ),
+      titleSmall: TextStyle(
+        fontSize: AppTypography.body,
+        fontWeight: AppTypography.semibold,
+      ),
+      titleMedium: TextStyle(
+        fontSize: AppTypography.title,
+        fontWeight: AppTypography.semibold,
+      ),
+      titleLarge: TextStyle(
+        fontSize: AppTypography.sectionHeading,
+        fontWeight: AppTypography.semibold,
+      ),
       headlineSmall: TextStyle(
-        fontSize: 24,
-        height: 1.2,
-        fontWeight: FontWeight.w600,
+        fontSize: AppTypography.pageHeading,
+        height: AppTypography.pageLineHeight,
+        fontWeight: AppTypography.semibold,
       ),
     ).apply(
       bodyColor: primaryText,
@@ -131,8 +149,8 @@ abstract final class AppTheme {
             borderRadius: BorderRadius.circular(AppRadius.md),
           ),
           textStyle: const TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w600,
+            fontSize: AppTypography.body,
+            fontWeight: AppTypography.semibold,
           ),
         ),
       ),
