@@ -22,6 +22,8 @@ void main() {
 
       expect(strings.number(1200), '١٢٠٠');
       expect(strings.parseInteger('١٢٠٠'), 1200);
+      expect(strings.parseDecimal('١٢٫٥'), 12.5);
+      expect(strings.parseDecimal('Infinity'), isNull);
       expect(strings.mealTypeLabel('breakfast'), 'الإفطار');
       expect(
         strings.dateLabel(DateTime(2026, 10, 27), DateTime(2026, 10, 27)),
