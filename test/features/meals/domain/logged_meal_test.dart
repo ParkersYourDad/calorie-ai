@@ -11,6 +11,12 @@ void main() {
         calories: 320,
         type: MealType.breakfast,
         loggedAt: DateTime(2026, 10, 27, 12, 30),
+        proteinGrams: 25.5,
+        carbohydratesGrams: 40,
+        fatGrams: 8.25,
+        sugarGrams: 0,
+        fiberGrams: 4,
+        sodiumMilligrams: 1200,
       );
 
       final restored = LoggedMeal.tryParse(meal.toJson());
@@ -21,6 +27,12 @@ void main() {
       expect(restored.calories, 320);
       expect(restored.type, MealType.breakfast);
       expect(restored.loggedAt, loggedAt);
+      expect(restored.proteinGrams, 25.5);
+      expect(restored.carbohydratesGrams, 40);
+      expect(restored.fatGrams, 8.25);
+      expect(restored.sugarGrams, 0);
+      expect(restored.fiberGrams, 4);
+      expect(restored.sodiumMilligrams, 1200);
     });
 
     test('reads the original integer meal type format', () {
@@ -35,6 +47,8 @@ void main() {
       expect(restored!.type, MealType.lunch);
       expect(restored.name, 'Soup');
       expect(restored.calories, 180);
+      expect(restored.proteinGrams, isNull);
+      expect(restored.sodiumMilligrams, isNull);
     });
 
     test('rejects invalid persisted records', () {
