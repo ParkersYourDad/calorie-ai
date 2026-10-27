@@ -115,7 +115,7 @@ class _AddMealSheetState extends State<AddMealSheet> {
             ),
             const SizedBox(height: AppSpacing.md),
             DropdownButtonFormField<MealType>(
-              value: _type,
+              initialValue: _type,
               isExpanded: true,
               decoration: InputDecoration(labelText: strings.mealType),
               items: MealType.values
