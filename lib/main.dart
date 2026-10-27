@@ -114,7 +114,7 @@ class _CalorieHomePageState extends State<CalorieHomePage> {
                 id: map['id'] as int,
                 name: map['name'] as String,
                 calories: map['calories'] as int,
-                type: MealType.values[typeIndex.clamp(0, MealType.values.length - 1)],
+                type: MealType.values[typeIndex.clamp(0, MealType.values.length - 1).toInt()],
               );
             }).toList();
       if (!mounted) return;
