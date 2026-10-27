@@ -6,53 +6,41 @@ import '../core/design/app_theme.dart';
 import '../core/localization/app_strings.dart';
 import '../features/home/presentation/home_page.dart';
 
+abstract final class AppPreferenceKeys {
+  static const themeMode = 'appearance.themeMode';
+  static const locale = 'appearance.locale';
+}
+
 class CalorieAiApp extends StatefulWidget {
-  const CalorieAiApp({super.key});
+  const CalorieAiApp({
+    this.initialThemeMode = ThemeMode.system,
+    this.initialLocale,
+    super.key,
+  });
+
+  final ThemeMode initialThemeMode;
+  final Locale? initialLocale;
 
   @override
   State<CalorieAiApp> createState() => _CalorieAiAppState();
 }
 
 class _CalorieAiAppState extends State<CalorieAiApp> {
-  static const _themeKey = 'appearance.themeMode';
-  static const _localeKey = 'appearance.locale';
-
   final SharedPreferencesAsync _preferences = SharedPreferencesAsync();
-  ThemeMode _themeMode = ThemeMode.system;
+  late ThemeMode _themeMode;
   Locale? _locale;
 
   @override
   void initState() {
     super.initState();
-    _restorePreferences();
-  }
-
-  Future<void> _restorePreferences() async {
-    try {
-      final themeName = await _preferences.getString(_themeKey);
-      final localeCode = await _preferences.getString(_localeKey);
-      if (!mounted) return;
-
-      final savedTheme = ThemeMode.values.where(
-        (mode) => mode.name == themeName,
-      );
-      final savedLocale = localeCode == 'en' || localeCode == 'ar'
-          ? Locale(localeCode!)
-          : null;
-
-      setState(() {
-        if (savedTheme.isNotEmpty) _themeMode = savedTheme.first;
-        _locale = savedLocale;
-      });
-    } catch (_) {
-      // Preferences are optional; the app can use system defaults.
-    }
+    _themeMode = widget.initialThemeMode;
+    _locale = widget.initialLocale;
   }
 
   Future<void> _changeThemeMode(ThemeMode value) async {
     setState(() => _themeMode = value);
     try {
-      await _preferences.setString(_themeKey, value.name);
+      await _preferences.setString(AppPreferenceKeys.themeMode, value.name);
     } catch (_) {
       // Keep the in-memory selection active if persistence is unavailable.
     }
@@ -62,9 +50,9 @@ class _CalorieAiAppState extends State<CalorieAiApp> {
     setState(() => _locale = value);
     try {
       if (value == null) {
-        await _preferences.remove(_localeKey);
+        await _preferences.remove(AppPreferenceKeys.locale);
       } else {
-        await _preferences.setString(_localeKey, value.languageCode);
+        await _preferences.setString(AppPreferenceKeys.locale, value.languageCode);
       }
     } catch (_) {
       // Keep the in-memory selection active if persistence is unavailable.
