@@ -52,7 +52,10 @@ class _CalorieAiAppState extends State<CalorieAiApp> {
       if (value == null) {
         await _preferences.remove(AppPreferenceKeys.locale);
       } else {
-        await _preferences.setString(AppPreferenceKeys.locale, value.languageCode);
+        await _preferences.setString(
+          AppPreferenceKeys.locale,
+          value.languageCode,
+        );
       }
     } catch (_) {
       // Keep the in-memory selection active if persistence is unavailable.
