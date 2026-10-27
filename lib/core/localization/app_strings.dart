@@ -21,79 +21,93 @@ class AppStrings {
   String get meals => isArabic ? 'الوجبات' : 'Meals';
   String get addMeal => isArabic ? 'إضافة وجبة' : 'Add meal';
   String get addFirstMeal => isArabic ? 'سجّل أول وجبة' : 'Log your first meal';
-  String get noMealsYet => isArabic ? 'لسه مفيش وجبات' : 'No meals yet';
-  String get emptyMealsHint =>
-      isArabic ? 'أضف وجبتك الأولى لمتابعة يومك.' : 'Add your first meal to start tracking your day.';
+  String get noMealsYet => isArabic ? 'لا توجد وجبات بعد' : 'No meals yet';
+  String get emptyMealsHint => isArabic
+      ? 'أضف وجبتك الأولى لبدء متابعة يومك.'
+      : 'Add your first meal to start tracking your day.';
   String get caloriesConsumed =>
       isArabic ? 'السعرات المستهلكة' : 'Calories consumed';
   String get kcal => 'kcal';
   String get dailyGoal => isArabic ? 'هدف السعرات اليومي' : 'Daily calorie goal';
   String get setGoal => isArabic ? 'تحديد الهدف' : 'Set goal';
   String get editGoal => isArabic ? 'تعديل الهدف' : 'Edit goal';
-  String get goalNotSet =>
-      isArabic ? 'حدّد هدفًا يوميًا لمتابعة تقدمك.' : 'Set a daily goal to track your progress.';
+  String get goalNotSet => isArabic
+      ? 'حدّد هدفًا يوميًا لمتابعة تقدمك.'
+      : 'Set a daily goal to track your progress.';
   String get remaining => isArabic ? 'متبقي' : 'remaining';
-  String get overGoal => isArabic ? 'أعلى من الهدف' : 'over goal';
+  String get overGoal => isArabic ? 'تجاوزت الهدف بمقدار' : 'over goal';
   String get cancel => isArabic ? 'إلغاء' : 'Cancel';
   String get save => isArabic ? 'حفظ' : 'Save';
   String get caloriesPerDay =>
       isArabic ? 'السعرات في اليوم' : 'Calories per day';
   String get goalHint => isArabic ? 'مثال: 2000' : 'e.g. 2000';
-  String get enterValidGoal =>
-      isArabic ? 'أدخل رقمًا بين 1 و100000' : 'Enter a number between 1 and 100,000';
+  String get enterValidGoal => isArabic
+      ? 'أدخل رقمًا بين 1 و100000'
+      : 'Enter a number between 1 and 100,000';
   String get foodName => isArabic ? 'اسم الطعام' : 'Food name';
-  String get foodNameHint =>
-      isArabic ? 'مثال: شوفان بالحليب' : 'e.g. Oatmeal';
+  String get foodNameHint => isArabic ? 'مثال: شوفان بالحليب' : 'e.g. Oatmeal';
   String get calories => isArabic ? 'السعرات (kcal)' : 'Calories (kcal)';
   String get caloriesHint => isArabic ? 'مثال: 320' : 'e.g. 320';
   String get mealType => isArabic ? 'نوع الوجبة' : 'Meal type';
-  String get enterFoodName =>
-      isArabic ? 'اكتب اسم الطعام' : 'Enter a food name';
-  String get enterValidCalories =>
-      isArabic ? 'أدخل سعرات صحيحة من 0 إلى 100000' : 'Enter a valid amount from 0 to 100,000';
-  String get breakfast => isArabic ? 'الفطار' : 'Breakfast';
+  String get enterFoodName => isArabic ? 'اكتب اسم الطعام' : 'Enter a food name';
+  String get enterValidCalories => isArabic
+      ? 'أدخل سعرات صحيحة من 0 إلى 100000'
+      : 'Enter a valid amount from 0 to 100,000';
+  String get breakfast => isArabic ? 'الإفطار' : 'Breakfast';
   String get lunch => isArabic ? 'الغداء' : 'Lunch';
   String get dinner => isArabic ? 'العشاء' : 'Dinner';
   String get snack => isArabic ? 'وجبة خفيفة' : 'Snack';
   String get removeMeal => isArabic ? 'حذف الوجبة' : 'Remove meal';
   String get undo => isArabic ? 'تراجع' : 'Undo';
   String get mealRemoved => isArabic ? 'تم حذف الوجبة' : 'Meal removed';
-  String get saveFailed =>
-      isArabic ? 'تعذّر حفظ التغيير على الجهاز.' : 'Could not save this change on your device.';
+  String get saveFailed => isArabic
+      ? 'تعذّر حفظ التغيير على الجهاز.'
+      : 'Could not save this change on your device.';
   String get storedDataWarning => isArabic
-      ? 'تعذّر قراءة بعض البيانات المحفوظة. يمكنك المتابعة، لكن البيانات التالفة قد لا تظهر.'
-      : 'Some saved data could not be read. You can continue, but damaged entries may be missing.';
+      ? 'تعذّرت قراءة بعض البيانات المحفوظة. قد لا تظهر السجلات التالفة.'
+      : 'Some saved data could not be read. Damaged entries may be missing.';
   String get previousDay => isArabic ? 'اليوم السابق' : 'Previous day';
   String get nextDay => isArabic ? 'اليوم التالي' : 'Next day';
+  String get settings => isArabic ? 'الإعدادات' : 'Settings';
+  String get appearance => isArabic ? 'المظهر' : 'Appearance';
+  String get language => isArabic ? 'اللغة' : 'Language';
+  String get system => isArabic ? 'النظام' : 'System';
+  String get light => isArabic ? 'فاتح' : 'Light';
+  String get dark => isArabic ? 'داكن' : 'Dark';
+  String get deviceLanguage => isArabic ? 'تلقائي' : 'Device';
+  String get settingsHint => isArabic
+      ? 'يُحفظ اختيارك على هذا الجهاز.'
+      : 'Your choices are saved on this device.';
 
-  String mealTypeLabel(MealTypeLabel type) => switch (type) {
-        MealTypeLabel.breakfast => breakfast,
-        MealTypeLabel.lunch => lunch,
-        MealTypeLabel.dinner => dinner,
-        MealTypeLabel.snack => snack,
+  String mealTypeLabel(String type) => switch (type) {
+        'breakfast' => breakfast,
+        'lunch' => lunch,
+        'dinner' => dinner,
+        _ => snack,
       };
 
   String dateLabel(DateTime date, DateTime todayDate) {
     final day = DateTime(date.year, date.month, date.day);
     final today = DateTime(todayDate.year, todayDate.month, todayDate.day);
-    if (day == today) return todayLabel;
+    if (day == today) return this.today;
     if (day == today.subtract(const Duration(days: 1))) return yesterday;
-    final weekday = _weekdays[date.weekday - 1];
-    final month = _months[date.month - 1];
+
     if (isArabic) {
       return '${_arabicWeekdays[date.weekday - 1]}، ${_arabicDigits(date.day)} ${_arabicMonths[date.month - 1]}';
     }
+    final weekday = _weekdays[date.weekday - 1];
+    final month = _months[date.month - 1];
     return '$weekday, $month ${date.day}';
   }
-
-  String get todayLabel => today;
 
   String caloriesValue(int value) => '${_digits(value)} $kcal';
 
   String remainingLabel(int value, {required bool exceeded}) {
     final amount = _digits(value.abs());
     if (isArabic) {
-      return exceeded ? '$amount kcal $overGoal' : '$amount kcal $remaining';
+      return exceeded
+          ? 'تجاوزت الهدف بمقدار $amount kcal'
+          : 'متبقي $amount kcal';
     }
     return exceeded ? '$amount kcal $overGoal' : '$amount kcal $remaining';
   }
@@ -166,8 +180,6 @@ class AppStrings {
     'ديسمبر',
   ];
 }
-
-enum MealTypeLabel { breakfast, lunch, dinner, snack }
 
 class _AppStringsDelegate extends LocalizationsDelegate<AppStrings> {
   const _AppStringsDelegate();
