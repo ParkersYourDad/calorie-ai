@@ -75,7 +75,9 @@ class DailyCaloriesSummary extends StatelessWidget {
       decoration: BoxDecoration(
         color: colors.surface,
         borderRadius: BorderRadius.circular(AppRadius.xl),
-        border: Border.all(color: colors.outlineVariant.withValues(alpha: 0.72)),
+        border: Border.all(
+          color: colors.outlineVariant.withValues(alpha: 0.72),
+        ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -293,7 +295,11 @@ class DataWarning extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Icon(Icons.info_outline_rounded, size: AppSizes.iconSmall, color: colors.error),
+        Icon(
+          Icons.info_outline_rounded,
+          size: AppSizes.iconSmall,
+          color: colors.error,
+        ),
         const SizedBox(width: AppSpacing.xs),
         Expanded(
           child: Text(
