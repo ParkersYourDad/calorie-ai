@@ -5,6 +5,7 @@ import '../../../core/localization/app_strings.dart';
 import '../../meals/domain/logged_meal.dart';
 import '../../meals/presentation/add_meal_sheet.dart';
 import '../../settings/presentation/app_settings_sheet.dart';
+import '../../nutrition/presentation/nutrition_summary_sheet.dart';
 import '../data/dashboard_storage.dart';
 import 'dashboard_components.dart';
 import 'goal_dialog.dart';
@@ -140,6 +141,12 @@ class _CalorieHomePageState extends State<CalorieHomePage> {
       calories: draft.calories,
       type: draft.type,
       loggedAt: loggedAt,
+      proteinGrams: draft.proteinGrams,
+      carbohydratesGrams: draft.carbohydratesGrams,
+      fatGrams: draft.fatGrams,
+      sugarGrams: draft.sugarGrams,
+      fiberGrams: draft.fiberGrams,
+      sodiumMilligrams: draft.sodiumMilligrams,
     );
 
     setState(() => _meals.add(meal));
@@ -266,6 +273,21 @@ class _CalorieHomePageState extends State<CalorieHomePage> {
                         goal: _dailyGoal,
                         onSetGoal: _setGoal,
                       ),
+                      if (_selectedDayMeals.any((meal) => meal.hasNutritionDetails))
+                        Align(
+                          alignment: AlignmentDirectional.centerStart,
+                          child: TextButton.icon(
+                            onPressed: () => NutritionSummarySheet.show(
+                              context,
+                              meals: _selectedDayMeals,
+                            ),
+                            icon: const Icon(
+                              Icons.equalizer_rounded,
+                              size: AppSizes.iconSmall,
+                            ),
+                            label: Text(strings.nutritionDetails),
+                          ),
+                        ),
                       if (_hasUnreadableData) ...[
                         const SizedBox(height: AppSpacing.md),
                         DataWarning(message: strings.storedDataWarning),
