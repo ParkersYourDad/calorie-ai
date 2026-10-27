@@ -96,7 +96,9 @@ class _AddMealSheetState extends State<AddMealSheet> {
             const SizedBox(height: AppSpacing.md),
             TextFormField(
               controller: _caloriesController,
-              keyboardType: const TextInputType.numberWithOptions(decimal: false),
+              keyboardType: const TextInputType.numberWithOptions(
+                decimal: false,
+              ),
               textInputAction: TextInputAction.done,
               onFieldSubmitted: (_) => _save(strings),
               decoration: InputDecoration(
